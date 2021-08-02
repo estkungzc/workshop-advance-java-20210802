@@ -23,12 +23,7 @@ class HelloTest {
     public void case02() {
         // Arrange
         Hello hello = new Hello();
-        hello.userDB = new UserDB() {
-            @Override
-            public String getNameById(int id) {
-                return "Chairat";
-            }
-        };
+        hello.userDB = id -> "Chairat";
         // Act
         String name = hello.workWithDb(1);
         // Assert
@@ -39,11 +34,8 @@ class HelloTest {
     @DisplayName("กรณี exception เมื่อหาผู้ใช้งาน Id=2 ไม่เจอ")
     public void case03() {
         Hello hello = new Hello();
-        hello.userDB = new UserDB(){
-            @Override
-            public String getNameById(int id){
-                throw new UserNotFoundException("Id=" + id + " Not found");
-            }
+        hello.userDB = id -> {
+            throw new UserNotFoundException("Id=" + id + " Not found");
         };
         Exception exception = assertThrows(UserNotFoundException.class, () ->
                 hello.workWithDb(2));

@@ -13,8 +13,6 @@ public class Hello {
     }
 }
 
-class UserDB {
-    public String getNameById(int id) {
-        throw new RuntimeException("DB fail");
-    }
+interface UserDB {
+    public String getNameById(int id);
 }
