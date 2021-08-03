@@ -8,13 +8,16 @@ import java.util.Random;
 @Component
 public class GenerateIdService {
 
+    private final Random random;
+
     @Autowired
-    private Random random;
+    public GenerateIdService(Random random) {
+        this.random = random;
+    }
 
     public String get() {
         int number = random.nextInt(10);
-        String id = "XYZ" + number;
-        return id;
+        return "XYZ" + number;
     }
 
 }
