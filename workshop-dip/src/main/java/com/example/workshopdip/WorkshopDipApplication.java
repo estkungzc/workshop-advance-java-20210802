@@ -3,18 +3,27 @@ package com.example.workshopdip;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+
+import java.util.Random;
 
 @SpringBootApplication
 public class WorkshopDipApplication {
 
-	public static void main(String[] args) {
+    @Bean
+    public Random createMyRandom() {
+        return new Random();
+    }
 
-		ConfigurableApplicationContext context = SpringApplication.run(WorkshopDipApplication.class, args);
-		System.out.println("Bean count=" + context.getBeanDefinitionCount());
+    public static void main(String[] args) {
+        // Beans => Java Bean, Enterprise Java Bean (EJB) => SessionBean, JPA
+        ConfigurableApplicationContext context
+                = SpringApplication.run(WorkshopDipApplication.class, args);
+        System.out.println("Bean count=" + context.getBeanDefinitionCount());
 
-		GenerateIdService service = context.getBean(GenerateIdService.class);
-		String id = service.get();
-		System.out.println("ID=" + id);
-	}
-
+        GenerateIdService service
+                = context.getBean(GenerateIdService.class);
+        String id = service.get();
+        System.out.println("ID=" + id);
+    }
 }
